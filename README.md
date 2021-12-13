@@ -5,11 +5,17 @@
 •	axios:  Promise based HTTP client for the browser
 •	cli-plugin-unit-jest: Run unit tests with Jest. Jest as a JS unit testing framework and runner.
 
-## Cat-Info
+## Git Clone
+.Use below command to clone project locally
+    git clone https://github.com/dzambare22/cat-category.git
+.After clone go into directory
+    cd cat-category
+
+## Cat-Category
 
 Used Vue.js framework to browse cat images as per categories
 
-You can find on-going update at: https://github.com/dzambare22/CatInfo
+You can find on-going update at: https://github.com/dzambare22/cat-category
 
 ## Project setup
 ```
