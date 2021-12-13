@@ -6,10 +6,10 @@
 •	cli-plugin-unit-jest: Run unit tests with Jest. Jest as a JS unit testing framework and runner.
 
 ## Git Clone
-.Use below command to clone project locally
-    git clone https://github.com/dzambare22/cat-category.git
-.After clone go into directory
-    cd cat-category
+1. Use below command to clone project locally
+     git clone https://github.com/dzambare22/cat-category.git
+2. After clone go into directory
+     cd cat-category
 
 ## Cat-Category
 
