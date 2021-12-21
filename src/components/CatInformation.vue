@@ -1,6 +1,6 @@
 <template>
   <v-app class="catInfo">
-    <v-row>
+    <v-row style="height: 0px;">
       <v-col cols="3" class="cat-category mt-5">
         <v-autocomplete
           v-model="selectedCategory"
@@ -16,7 +16,7 @@
         ></v-autocomplete>
       </v-col>
     </v-row>
-    <v-row>
+    <!-- <v-row>
       <v-col cols="12" style="height: 400px">
         <v-img
           v-for="(image, index) in images"
@@ -29,6 +29,36 @@
           style="float: left"
         >
         </v-img>
+      </v-col>
+    </v-row> -->
+    <v-row style="overflow:auto;height:200px;">
+      <v-col
+        v-for="(image, index) in images"
+        data-testid="cat-images"
+        :key="index"
+        class="d-flex child-flex"
+        cols="3"
+      >
+      <v-card>
+        <v-img
+          :src="image.url"
+          aspect-ratio="1"
+          class="grey lighten-2"
+        >
+          <template v-slot:placeholder>
+            <v-row
+              class="fill-height ma-0"
+              align="center"
+              justify="center"
+            >
+              <v-progress-circular
+                indeterminate
+                color="grey lighten-5"
+              ></v-progress-circular>
+            </v-row>
+          </template>
+        </v-img>
+      </v-card>
       </v-col>
     </v-row>
     <v-row>
@@ -100,7 +130,7 @@ export default {
             this.images.push({
               url: data.url,
               height: 150, //data.height,
-              width: 250, //data.width
+              width: 200, //data.width
             });
           });
         });

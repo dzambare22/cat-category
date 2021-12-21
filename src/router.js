@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Sidebar from "./components/SideBar";
+import Category from "./components/CatInformation";
 import Breed from "./components/BreedInformation";
 
 Vue.use(Router);
@@ -15,7 +15,7 @@ export default new Router({
     {
       path: "/category",
       name: "searchBy",
-      component: Sidebar
+      component: Category
     },
     {
       path: "/breed",

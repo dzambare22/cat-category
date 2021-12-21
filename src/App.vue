@@ -1,7 +1,11 @@
 <template>
   <div id="app">
-    <router-view/>
-    <SideBar></SideBar>
+    <v-app id="inspire">
+      <v-app-bar color="deep-purple accent-4" height="50" dense dark>
+        <v-toolbar-title style="font-size: 16px">SearchBy</v-toolbar-title>
+      </v-app-bar>
+      <SideBar></SideBar>
+    </v-app>
   </div>
 
   <!-- <CatInformation msg="Welcome to vue unit test"></CatInformation> -->
@@ -12,7 +16,7 @@ import SideBar from "./components/SideBar";
 export default {
   name: "App",
   components: {
-    SideBar
+    SideBar,
   },
   data() {
     return {
