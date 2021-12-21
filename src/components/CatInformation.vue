@@ -65,6 +65,12 @@ export default {
   props: {
     msg: String,
   },
+  created() {
+    console.log("in computed");
+  },
+  computed() {
+    console.log("in computed");
+  },
   mounted() {
     this.getAllCategories();
     this.onCategoryChange(this.selectedCategory.id);

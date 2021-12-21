@@ -1,16 +1,28 @@
 <template>
-  <CatInformation msg="Welcome to vue unit test"></CatInformation>
+  <div id="app">
+    <router-view/>
+    <SideBar></SideBar>
+  </div>
+
+  <!-- <CatInformation msg="Welcome to vue unit test"></CatInformation> -->
 </template>
 
 <script>
-import CatInformation from "./components/CatInformation";
+import SideBar from "./components/SideBar";
 export default {
   name: "App",
   components: {
-    CatInformation,
+    SideBar
   },
   data() {
-    return {};
+    return {
+      selectedItem: 0,
+      items: [
+        { title: "Category" },
+        { title: "Breed" },
+        { title: "File type" },
+      ],
+    };
   },
   mounted() {},
   methods: {},
