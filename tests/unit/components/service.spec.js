@@ -1,11 +1,9 @@
-// import apiService from "@services/fs-services.js";
-
 import axios from "axios";
 import { BASE_URL, fetchUsers } from "./utils";
 
 jest.mock("axios");
 
-describe("fetchUsers", () => {
+describe("fetchAPI", () => {
   describe("when API call is successful", () => {
     it("should return category list", async () => {
       const categories = [

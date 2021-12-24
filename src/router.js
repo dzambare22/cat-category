@@ -6,21 +6,22 @@ import Breed from "./components/BreedInformation";
 Vue.use(Router);
 
 export default new Router({
-    mode: "history",
+  linkActiveClass: "active",
+  mode: "history",
   routes: [
     {
       path: "/",
-      redirect: { name: "searchBy" },
+      redirect: { name: "category" },
     },
     {
       path: "/category",
-      name: "searchBy",
-      component: Category
+      name: "category",
+      component: Category,
     },
     {
       path: "/breed",
       name: "breed",
-      component: Breed
+      component: Breed,
     },
   ],
 });

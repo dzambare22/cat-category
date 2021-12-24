@@ -19,7 +19,8 @@ export default {
   },
   getBreedImageOnSearch(breedId) {
     var params = {
-      breed_ids: breedId
+      breed_ids: breedId,
+      limit: 8
     };
     return axios.get("https://api.thecatapi.com/v1/images/search?", {
       params: params

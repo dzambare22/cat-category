@@ -29,11 +29,7 @@ export default {
   data() {
     return {
       selectedItem: 0,
-      items: [
-        { title: "Category" },
-        { title: "Breed" },
-        { title: "File type" },
-      ],
+      items: [{ title: "Category" }, { title: "Breed" }],
     };
   },
   mounted() {},
