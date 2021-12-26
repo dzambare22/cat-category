@@ -1,22 +1,22 @@
 <template>
   <div id="app">
-    <v-app id="inspire">
-      <v-app-bar color="deep-purple accent-4" height="50" dense dark>
-        <v-toolbar-title style="font-size: 16px">SearchBy</v-toolbar-title>
-      </v-app-bar>
-      <SideBar></SideBar>
+    <v-app>
+      <ToolBar></ToolBar>
+      <v-row>
+        <v-col clos="12" class="px-5">
+          <router-view />
+        </v-col>
+      </v-row>
     </v-app>
   </div>
-
-  <!-- <CatInformation msg="Welcome to vue unit test"></CatInformation> -->
 </template>
 
 <script>
-import SideBar from "./components/SideBar";
+import ToolBar from "./components/ToolBar";
 export default {
   name: "App",
   components: {
-    SideBar,
+    ToolBar,
   },
   data() {
     return {
@@ -33,3 +33,8 @@ export default {
 };
 </script>
 <style></style>
+<style lang="scss">
+  .v-application--wrap {
+    min-height: 97vh !important;
+  }
+</style>

@@ -9,21 +9,25 @@ export default {
   },
   getImageOnSerach(categoryId, pageSize) {
     var params = {
-      category_ids: categoryId,
-      limit: 10,
+      limit: 12,
       page: pageSize,
     };
+    if (categoryId) {
+      params.category_ids = categoryId;
+    }
     return axios.get("https://api.thecatapi.com/v1/images/search?", {
       params: params,
     });
   },
   getBreedImageOnSearch(breedId) {
     var params = {
-      breed_ids: breedId,
-      limit: 8
+      limit: 12,
     };
+    if (breedId) {
+      params.breed_ids = breedId;
+    }
     return axios.get("https://api.thecatapi.com/v1/images/search?", {
-      params: params
+      params: params,
     });
   },
 };

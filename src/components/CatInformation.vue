@@ -1,7 +1,7 @@
 <template>
-  <v-app class="catInfo">
-    <v-row style="height: 0px">
-      <v-col cols="3" class="cat-category mt-5">
+  <div id="category-section">
+    <v-row>
+      <v-col cols="12" class="cat-category mt-5">
         <v-autocomplete
           v-model="selectedCategory"
           data-testid="select-category"
@@ -16,7 +16,7 @@
         ></v-autocomplete>
       </v-col>
     </v-row>
-    <v-row style="overflow: auto; height: 300px">
+    <v-row class="category-images">
       <v-col
         v-for="(image, index) in images"
         data-testid="cat-images"
@@ -25,7 +25,12 @@
         cols="3"
       >
         <v-card>
-          <v-img :src="image.url" aspect-ratio="1" class="grey lighten-2">
+          <v-img
+            :src="image.url"
+            class="grey lighten-2"
+            height="300"
+            width="350"
+          >
             <template v-slot:placeholder>
               <v-row class="fill-height ma-0" align="center" justify="center">
                 <v-progress-circular
@@ -51,7 +56,7 @@
         </div>
       </v-col>
     </v-row>
-  </v-app>
+  </div>
 </template>
 <script>
 import apiService from "../services/fs-services";
@@ -61,31 +66,18 @@ export default {
   data() {
     return {
       page: 1,
-      selectedCategory: {
-        id: 1,
-        name: "Hats",
-      },
+      selectedCategory: "",
       items: [],
       images: [],
     };
   },
-  props: {
-    msg: String,
-  },
-  created() {
-    console.log("in computed");
-  },
-  computed() {
-    console.log("in computed");
-  },
   mounted() {
     this.getAllCategories();
-    this.onCategoryChange(this.selectedCategory.id);
+    this.onCategoryChange();
   },
   methods: {
     getAllCategories() {
       apiService.getAllCategories().then((response) => {
-        // console.log("response.data", JSON.stringify(response.data));
         response.data.forEach((ele) => {
           var obj = {
             id: ele.id,
@@ -95,26 +87,29 @@ export default {
         });
       });
     },
-    onCategoryChange(selectedCategory) {
-      selectedCategory = selectedCategory
-        ? selectedCategory
-        : this.selectedCategory;
+    onCategoryChange() {
       this.images = [];
       apiService
-        .getImageOnSerach(selectedCategory, this.page)
+        .getImageOnSerach(this.selectedCategory, this.page)
         .then((response) => {
           response.data.forEach((data) => {
             this.images.push({
               url: data.url,
-              height: 150, //data.height,
-              width: 200, //data.width
             });
           });
         });
     },
     OnPageChange() {
-      this.onCategoryChange(this.selectedCategory.id);
+      this.onCategoryChange();
     },
   },
 };
 </script>
+<style lang="scss" scoped>
+#category-section {
+  .category-images {
+    overflow: auto;
+    height: 300px;
+  }
+}
+</style>
