@@ -22,16 +22,24 @@ export default {
   name: "ToolBar",
   data() {
     return {
-      tab: null,
+      tab: 0,
       items: [{ title: "Category" }, { title: "Breed" }],
     };
   },
+  mounted() {
+    console.log("tab===", this.tab, this.$route);
+    if (this.$route.path === "/breed") {
+      this.tab = 1;
+    } else {
+      this.tab = 0;
+    }
+  },
   methods: {
     onTabClick(item) {
-      if (item.title === "Category") {
-        this.$router.push("/category");
+      if (item.title !== "Breed") {
+        this.$router.push("/category").catch(() => {});
       } else {
-        this.$router.push("/breed");
+        this.$router.push("/breed").catch(() => {});
       }
     },
   },
