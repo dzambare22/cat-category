@@ -76,27 +76,30 @@ export default {
     this.onCategoryChange();
   },
   methods: {
-    getAllCategories() {
-      apiService.getAllCategories().then((response) => {
+    async getAllCategories() {
+      this.items = await apiService.getAllCategories().then((response) => {
+        var items = [];
         response.data.forEach((ele) => {
           var obj = {
             id: ele.id,
             name: ele.name[0].toUpperCase() + ele.name.substring(1),
           };
-          this.items.push(obj);
+          items.push(obj);
         });
+        return items;
       });
     },
-    onCategoryChange() {
-      this.images = [];
-      apiService
+    async onCategoryChange() {
+      this.images = await apiService
         .getImageOnSerach(this.selectedCategory, this.page)
         .then((response) => {
+          var images = [];
           response.data.forEach((data) => {
-            this.images.push({
+            images.push({
               url: data.url,
             });
           });
+          return images;
         });
     },
     OnPageChange() {

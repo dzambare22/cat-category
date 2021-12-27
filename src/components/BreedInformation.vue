@@ -76,27 +76,35 @@ export default {
     this.onBreedChange();
   },
   methods: {
-    getAllBreeds() {
-      apiService.getAllBreeds().then((response) => {
+    async getAllBreeds() {
+      this.items = await apiService.getAllBreeds().then((response) => {
+        var items = [];
         response.data.forEach((ele) => {
           var obj = {
             id: ele.id,
             name: ele.name[0].toUpperCase() + ele.name.substring(1),
           };
-          this.items.push(obj);
+          items.push(obj);
         });
+        return items;
       });
     },
-    onBreedChange() {
-      this.breedImages = [];
-      apiService.getBreedImageOnSearch(this.selectedBreed).then((response) => {
-        response.data.forEach((data) => {
-          this.breedImages.push({
-            url: data.url,
+    async onBreedChange() {
+      this.breedImages = await apiService
+        .getBreedImageOnSearch(this.selectedBreed)
+        .then((response) => {
+          var breedImages = [];
+          response.data.forEach((data) => {
+            breedImages.push({
+              url: data.url,
+            });
           });
+          return breedImages;
         });
-      });
     },
+    OnPageChange() {
+      this.onBreedChange();
+    }
   },
 };
 </script>
