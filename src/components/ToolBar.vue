@@ -27,7 +27,6 @@ export default {
     };
   },
   mounted() {
-    console.log("tab===", this.tab, this.$route);
     if (this.$route.path === "/breed") {
       this.tab = 1;
     } else {
@@ -36,10 +35,10 @@ export default {
   },
   methods: {
     onTabClick(item) {
-      if (item.title !== "Breed") {
-        this.$router.push("/category").catch(() => {});
+      if (item.title === "Category") {
+        this.$router.push("/category");
       } else {
-        this.$router.push("/breed").catch(() => {});
+        this.$router.push("/breed");
       }
     },
   },
