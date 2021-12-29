@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Category from "./components/CatInformation";
-import Breed from "./components/BreedInformation";
+import Category from "../components/CatInformation";
+import Breed from "../components/BreedInformation";
 
 Vue.use(Router);
 

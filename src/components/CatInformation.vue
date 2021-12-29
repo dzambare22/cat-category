@@ -1,110 +1,62 @@
 <template>
   <div id="category-section">
-    <v-row>
-      <v-col cols="12" class="cat-category mt-5">
-        <v-autocomplete
-          v-model="selectedCategory"
-          data-testid="select-category"
-          :items="items"
-          item-text="name"
-          item-value="id"
-          label="Categories"
-          deletable-chips
-          small-chips
-          dense
-          @change="onCategoryChange()"
-        ></v-autocomplete>
-      </v-col>
-    </v-row>
-    <v-row class="category-images">
-      <v-col
-        v-for="(image, index) in images"
-        data-testid="cat-images"
-        :key="index"
-        class="d-flex child-flex"
-        cols="3"
-      >
-        <v-card>
-          <v-img
-            :src="image.url"
-            class="grey lighten-2"
-            height="300"
-            width="350"
-          >
-            <template v-slot:placeholder>
-              <v-row class="fill-height ma-0" align="center" justify="center">
-                <v-progress-circular
-                  indeterminate
-                  color="grey lighten-5"
-                ></v-progress-circular>
-              </v-row>
-            </template>
-          </v-img>
-        </v-card>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col cols="12">
-        <div class="text-center">
-          <v-pagination
-            v-model="page"
-            data-testid="pagination-button"
-            :length="10"
-            :total-visible="7"
-            @input="OnPageChange()"
-          ></v-pagination>
-        </div>
-      </v-col>
-    </v-row>
+    <CommonComponent
+      tab="Category"
+      label="Categories"
+      :getCategoryUrl="getCategoryUrl"
+      :getCategoryImagesUrl="getCategoryImagesUrl"
+    ></CommonComponent>
   </div>
 </template>
 <script>
-import apiService from "../services/fs-services";
+// import apiService from "../services/fs-services";
+import CommonComponent from "../common/CommonComponent";
 
 export default {
   name: "CatInfo",
+  components: {
+    CommonComponent,
+  },
   data() {
     return {
-      page: 1,
-      selectedCategory: "",
-      items: [],
-      images: [],
+      getCategoryUrl: "https://api.thecatapi.com/v1/categories",
+      getCategoryImagesUrl: "https://api.thecatapi.com/v1/images/search?",
     };
   },
   mounted() {
-    this.getAllCategories();
-    this.onCategoryChange();
+    // this.getAllCategories();
+    // this.onCategoryChange();
   },
   methods: {
-    async getAllCategories() {
-      this.items = await apiService.getAllCategories().then((response) => {
-        var items = [];
-        response.data.forEach((ele) => {
-          var obj = {
-            id: ele.id,
-            name: ele.name[0].toUpperCase() + ele.name.substring(1),
-          };
-          items.push(obj);
-        });
-        return items;
-      });
-    },
-    async onCategoryChange() {
-      this.images = await apiService
-        .getImageOnSerach(this.selectedCategory, this.page)
-        .then((response) => {
-          var images = [];
-          response.data.forEach((data) => {
-            images.push({
-              url: data.url,
-            });
-          });
-          return images;
-        });
-    },
-    OnPageChange() {
-      this.onCategoryChange();
-    },
+    // async getAllCategories() {
+    //   this.items = await apiService.getAllCategories().then((response) => {
+    //     var items = [];
+    //     response.data.forEach((ele) => {
+    //       var obj = {
+    //         id: ele.id,
+    //         name: ele.name[0].toUpperCase() + ele.name.substring(1),
+    //       };
+    //       items.push(obj);
+    //     });
+    //     return items;
+    //   });
+    // },
+    // async onCategoryChange() {
+    //   this.images = await apiService
+    //     .getImageOnSerach(this.selectedCategory, this.page)
+    //     .then((response) => {
+    //       var images = [];
+    //       response.data.forEach((data) => {
+    //         images.push({
+    //           url: data.url,
+    //         });
+    //       });
+    //       return images;
+    //     });
+    // },
+    // OnPageChange() {
+    //   this.onCategoryChange();
+    // },
   },
 };
 </script>

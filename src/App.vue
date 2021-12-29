@@ -27,14 +27,12 @@ export default {
         { title: "File type" },
       ],
     };
-  },
-  mounted() {},
-  methods: {},
+  }
 };
 </script>
 <style></style>
 <style lang="scss">
-  .v-application--wrap {
-    min-height: 97vh !important;
-  }
+.v-application--wrap {
+  min-height: 97vh !important;
+}
 </style>
