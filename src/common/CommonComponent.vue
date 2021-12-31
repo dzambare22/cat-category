@@ -1,16 +1,64 @@
 <template>
-  <div class="container">
-  <button type="button" class="btn">Basic</button>
-<button type="button" class="btn btn-primary">Primary</button>
-<button type="button" class="btn btn-secondary">Secondary</button>
-<button type="button" class="btn btn-success">Success</button>
-<button type="button" class="btn btn-info">Info</button>
-<button type="button" class="btn btn-warning">Warning</button>
-<button type="button" class="btn btn-danger">Danger</button>
-<button type="button" class="btn btn-dark">Dark</button>
-<button type="button" class="btn btn-light">Light</button>
-<button type="button" class="btn btn-link">Link</button>
-</div>
+ 
+
+<div>
+    <v-row>
+      <v-col cols="12" class="cat-category mt-5">
+        <v-autocomplete
+          v-model="selectedCategory"
+          data-testid="select-category"
+          :items="items"
+          item-text="name"
+          item-value="id"
+          :label="label"
+          deletable-chips
+          small-chips
+          dense
+          @change="onChange()"
+        ></v-autocomplete>
+      </v-col>
+    </v-row>
+    <v-row class="category-images">
+      <v-col
+        v-for="(image, index) in images"
+        data-testid="cat-images"
+        :key="index"
+        class="d-flex child-flex"
+        cols="3"
+      >
+        <v-card>
+          <v-img
+            :src="image.url"
+            class="grey lighten-2"
+            height="300"
+            width="350"
+          >
+            <template v-slot:placeholder>
+              <v-row class="fill-height ma-0" align="center" justify="center">
+                <v-progress-circular
+                  indeterminate
+                  color="grey lighten-5"
+                ></v-progress-circular>
+              </v-row>
+            </template>
+          </v-img>
+        </v-card>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col cols="12">
+        <div class="text-center">
+          <v-pagination
+            v-model="page"
+            data-testid="pagination-button"
+            :length="10"
+            :total-visible="7"
+            @input="OnPageChange()"
+          ></v-pagination>
+        </div>
+      </v-col>
+    </v-row>
+  </div>
 </template>
 <script>
 import apiService from "../services/fs-services";
