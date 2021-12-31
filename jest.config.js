@@ -8,6 +8,8 @@ module.exports = {
     "^.+\\.jsx?$": "babel-jest",
   },
   transformIgnorePatterns: ["/node_modules/"],
+  collectCoverage: true,
+  collectCoverageFrom: ["**/*.{js,vue}", "!**/node_modules/**"],
   moduleNameMapper: {
     "^@/(.*)$": "<rootDir>/src/$1",
   },
