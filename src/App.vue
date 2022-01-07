@@ -3,7 +3,7 @@
     <v-app>
       <ToolBar></ToolBar>
       <v-row>
-        <v-col clos="12" class="px-5">
+        <v-col cols="12" class="ml-n10">
           <router-view />
         </v-col>
       </v-row>

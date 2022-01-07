@@ -1,21 +1,23 @@
 <template>
-  <v-card>
-    <v-toolbar color="cyan" dark flat>
-      <v-toolbar-title class="ml-5">Search Cat Information By</v-toolbar-title>
-      <template v-slot:extension>
-        <v-tabs v-model="tab" align-with-title>
-          <v-tabs-slider color="yellow"></v-tabs-slider>
-          <v-tab
-            v-for="(item, index) in items"
-            :key="index"
-            @click="onTabClick(item)"
+  <div class="row">
+    <nav class="navbar navbar-expand-sm bg-light fixed-top">
+      <ul class="nav nav-pills" role="tablist">
+        <li
+          class="nav-item"
+          v-for="(item, index) in items"
+          :key="index"
+          @click="onTabClick(item)"
+        >
+          <a
+            class="nav-link"
+            :class="{ active: $route.path === item.path }"
+            data-toggle="pill"
+            >{{ item.title }}</a
           >
-            {{ item.title }}
-          </v-tab>
-        </v-tabs>
-      </template>
-    </v-toolbar>
-  </v-card>
+        </li>
+      </ul>
+    </nav>
+  </div>
 </template>
 <script>
 export default {
@@ -23,15 +25,14 @@ export default {
   data() {
     return {
       tab: 0,
-      items: [{ title: "Category" }, { title: "Breed" }],
+      items: [
+        { title: "Category", path: "/category" },
+        { title: "Breed", path: "/breed" },
+      ],
     };
   },
   mounted() {
-    if (this.$route.path === "/breed") {
-      this.tab = 1;
-    } else {
-      this.tab = 0;
-    }
+   
   },
   methods: {
     onTabClick(item) {
