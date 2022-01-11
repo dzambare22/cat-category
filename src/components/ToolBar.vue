@@ -1,6 +1,7 @@
 <template>
   <div class="row">
     <nav class="navbar navbar-expand-sm bg-light fixed-top">
+      <a class="navbar-brand" href="javascript:void(0)">Cats</a>
       <ul class="nav nav-pills" role="tablist">
         <li
           class="nav-item"
@@ -30,9 +31,6 @@ export default {
         { title: "Breed", path: "/breed" },
       ],
     };
-  },
-  mounted() {
-   
   },
   methods: {
     onTabClick(item) {

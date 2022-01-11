@@ -1,13 +1,9 @@
 <template>
   <div id="app">
-    <v-app>
-      <ToolBar></ToolBar>
-      <v-row>
-        <v-col cols="12" class="ml-n10">
-          <router-view />
-        </v-col>
-      </v-row>
-    </v-app>
+    <ToolBar></ToolBar>
+    <div class="container-fluid">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
@@ -17,16 +13,6 @@ export default {
   name: "App",
   components: {
     ToolBar,
-  },
-  data() {
-    return {
-      selectedItem: 0,
-      items: [
-        { title: "Category" },
-        { title: "Breed" },
-        { title: "File type" },
-      ],
-    };
   }
 };
 </script>

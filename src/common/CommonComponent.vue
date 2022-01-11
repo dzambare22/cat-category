@@ -1,34 +1,42 @@
 <template>
-  <div class="container">
+  <div class="main">
     <div class="row">
-      <div class="col-xl-4">
-        <label>{{ label }}:</label>
+      <div class="col-md-4">
         <select
           class="custom-select"
           v-model="selectedCategory"
           @change="onChange()"
+          aria-placeholder="label"
         >
           <option v-for="(item, index) in items" :key="index" :value="item.id">
             {{ item.name }}
           </option>
         </select>
       </div>
-    </div>
-    <div class="row image-section">
-      <div class="col-md-4" v-for="(image, index) in images" :key="index">
-        <div class="card">
-          <img :src="image.url" class="img-fluid" />
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-8 float-right">
         <Pagination
+          class="float-right"
           v-model="page"
           :rows-number="rows"
           :rows-per-page="5"
-          @OnPageChange="OnPageChange"
+          @onPageChange="onPageChange"
         />
+      </div>
+    </div>
+    <div class="row image-section">
+      <div
+        class="col-6 col-sm-4 col-md-3 col-lg-2"
+        v-for="(image, index) in images"
+        :key="index"
+      >
+        <div class="card">
+          <img
+            :src="image.url"
+            class="img-fluid"
+            :title="image.description"
+            data-testid="cat-img"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -81,7 +89,6 @@ export default {
         });
     },
     async onChange() {
-      var images = [];
       this.images = await apiService
         .getImageOnChange(
           this.tab,
@@ -90,15 +97,16 @@ export default {
           this.page
         )
         .then((response) => {
-          response.data.forEach((data) => {
-            images.push({
+          return response.data.map((data) => {
+            return {
               url: data.url,
-            });
+              description: data.breeds.length ? data.breeds[0].description : "",
+            };
           });
-          return images;
+          // return images;
         });
     },
-    OnPageChange(page) {
+    onPageChange(page) {
       this.page = page;
       this.onChange();
     },
@@ -106,14 +114,18 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.container {
+.main {
+  margin-top: 75px;
+  .card {
+    height: 200px;
+  }
   .image-section {
     overflow: auto;
     overflow-x: hidden;
-    height: 300px;
     .img-fluid {
+      width: 100%;
       max-width: 380px;
-      height: 250px;
+      height: 100%;
     }
   }
 }

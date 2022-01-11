@@ -1,9 +1,10 @@
-import { shallowMount } from "@vue/test-utils";
+import { mount } from "@vue/test-utils";
 import CommonComponent from "@/common/CommonComponent.vue";
+
 
 describe("CommonComponent.vue", () => {
   let wrapper;
-  wrapper = shallowMount(CommonComponent, {
+  wrapper = mount(CommonComponent, {
     propsData: {
       getCategoryUrl: "https://api.thecatapi.com/v1/categories",
       getCategoryImagesUrl: "https://api.thecatapi.com/v1/images/search?",
@@ -27,41 +28,31 @@ describe("CommonComponent.vue", () => {
   });
   it("should renders vuetify components", () => {
     //assert
-    expect(wrapper.find("[data-testid='select-category']").exists()).toBe(true);
-    expect(wrapper.find("[data-testid='pagination-button']").exists()).toBe(
-      true
-    );
+    expect(wrapper.find(".custom-select").exists()).toBe(true);
+    // expect(wrapper.find("[data-testid='cat-img']").exists()).toBe(true);
   });
   it("renders if variable is defined", () => {
-    console.log("this test case runs");
     expect(wrapper.vm._data.selectedCategory).toBeDefined();
     expect(wrapper.vm._data.items).toBeDefined();
     expect(wrapper.vm._data.images).toBeDefined();
     expect(wrapper.vm._data.page).toBeDefined();
   });
-  // it("check images url", () => {
-  //   // const ev = {
-  //   //   url: "https://28.media.tumblr.com/tumblr_ks1a707b1b1qa9hjso1_1280.png"
-  //   // }
-  //   wrapper.vm.images = [
-  //     {
-  //       url: "https://28.media.tumblr.com/tumblr_ks1a707b1b1qa9hjso1_1280.png",
-  //     },
-  //     {
-  //       url: "https://cdn2.thecatapi.com/images/r3.jpg",
-  //     }
-  //   ];
-  //   // expect(wrapper.vm.images[0].url).toBe('');
-  //   wrapper.vm.onChange();
-  //   expect(wrapper.vm.images[0].url).toEqual("https://28.media.tumblr.com/tumblr_ks1a707b1b1qa9hjso1_1280.png")
-  // });
-  it('clicks it', () => {
-    const instance = wrapper.instance();
-    const spy = jest.spyOn(instance, 'onChange')
-    instance.forceUpdate();
+  it("renders if method exist", () => {
+    let instance = wrapper.vm;
+    let onPageChange = instance.onPageChange;
+    let getInfo = instance.getInfo;
+    if (onPageChange != undefined) {
+      console.log("method 'onPageChange' exists");
+    }
+    if (getInfo != undefined) {
+      console.log("method 'getInfo' exists");
+    }
+    jest.spyOn(instance, "getInfo");
+    instance.getInfo();
+    jest.spyOn(instance, "onPageChange");
+    instance.onPageChange();
 
-    const p = wrapper.find("[data-testid='select-category']")
-    p.simulate('change')
-    expect(spy).toHaveBeenCalled()
-})
+    expect(instance.onPageChange).toHaveBeenCalled();
+    expect(instance.getInfo).toHaveBeenCalled();
+  });
 });

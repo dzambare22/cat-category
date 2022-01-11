@@ -24,28 +24,28 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/7</span>
-            </div>
-        
-            
-            <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
-                <span class="quiet">Branches</span>
                 <span class='fraction'>0/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
+                <span class="quiet">Branches</span>
+                <span class='fraction'>0/2</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/7</span>
+                <span class='fraction'>0/4</span>
             </div>
         
             
@@ -101,8 +101,7 @@
 <a name='L43'></a><a href='#L43'>43</a>
 <a name='L44'></a><a href='#L44'>44</a>
 <a name='L45'></a><a href='#L45'>45</a>
-<a name='L46'></a><a href='#L46'>46</a>
-<a name='L47'></a><a href='#L47'>47</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L46'></a><a href='#L46'>46</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -123,18 +122,17 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -149,23 +147,26 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&lt;template&gt;
-  &lt;v-card&gt;
-    &lt;v-toolbar color="cyan" dark flat&gt;
-      &lt;v-toolbar-title class="ml-5"&gt;Search Cat Information By&lt;/v-toolbar-title&gt;
-      &lt;template v-slot:extension&gt;
-        &lt;v-tabs v-model="tab" align-with-title&gt;
-          &lt;v-tabs-slider color="yellow"&gt;&lt;/v-tabs-slider&gt;
-          &lt;v-tab
-            v-for="(item, index) in items"
-            :key="index"
-            @click="onTabClick(item)"
+  &lt;div class="row"&gt;
+    &lt;nav class="navbar navbar-expand-sm bg-light fixed-top"&gt;
+      &lt;a class="navbar-brand" href="javascript:void(0)"&gt;Cats&lt;/a&gt;
+      &lt;ul class="nav nav-pills" role="tablist"&gt;
+        &lt;li
+          class="nav-item"
+          v-for="(item, index) in items"
+          :key="index"
+          @click="onTabClick(item)"
+        &gt;
+          &lt;a
+            class="nav-link"
+            :class="{ active: $route.path === item.path }"
+            data-toggle="pill"
+            &gt;{{ item.title }}&lt;/a
           &gt;
-            {{ item.title }}
-          &lt;/v-tab&gt;
-        &lt;/v-tabs&gt;
-      &lt;/template&gt;
-    &lt;/v-toolbar&gt;
-  &lt;/v-card&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/nav&gt;
+  &lt;/div&gt;
 &lt;/template&gt;
 &lt;script&gt;
 export default {
@@ -173,15 +174,11 @@ export default {
 <span class="fstat-no" title="function not covered" >  data() {</span>
 <span class="cstat-no" title="statement not covered" >    return {</span>
       tab: 0,
-      items: [{ title: "Category" }, { title: "Breed" }],
+      items: [
+        { title: "Category", path: "/category" },
+        { title: "Breed", path: "/breed" },
+      ],
     };
-  },
-<span class="fstat-no" title="function not covered" >  mounted() {</span>
-<span class="cstat-no" title="statement not covered" >    if (this.$route.path === "/breed") {</span>
-<span class="cstat-no" title="statement not covered" >      this.tab = 1;</span>
-    } else {
-<span class="cstat-no" title="statement not covered" >      this.tab = 0;</span>
-    }
   },
   methods: {
 <span class="fstat-no" title="function not covered" >    onTabClick(item) {</span>
@@ -201,7 +198,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Fri Dec 31 2021 09:53:09 GMT+0530 (India Standard Time)
+                at Tue Jan 11 2022 09:08:17 GMT+0530 (India Standard Time)
             </div>
         </div>
         <script src="..\..\..\prettify.js"></script>
