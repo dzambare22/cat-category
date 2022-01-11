@@ -20,8 +20,6 @@
       <a class="page-link" @click="onPageForward">Next </a>
     </li>
   </ul>
-  <!-- </div> -->
-  <!-- </div> -->
 </template>
 <script>
 export default {

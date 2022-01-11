@@ -1,7 +1,6 @@
 import { mount } from "@vue/test-utils";
 import CommonComponent from "@/common/CommonComponent.vue";
 
-
 describe("CommonComponent.vue", () => {
   let wrapper;
   wrapper = mount(CommonComponent, {
@@ -54,5 +53,20 @@ describe("CommonComponent.vue", () => {
 
     expect(instance.onPageChange).toHaveBeenCalled();
     expect(instance.getInfo).toHaveBeenCalled();
+  });
+  it("check array in methods", () => {
+    const items = [
+      {
+        id: 5,
+        name: "boxes",
+      },
+    ];
+    expect(items).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          name: "boxes",
+        }),
+      ])
+    );
   });
 });

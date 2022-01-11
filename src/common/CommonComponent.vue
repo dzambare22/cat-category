@@ -8,6 +8,7 @@
           @change="onChange()"
           aria-placeholder="label"
         >
+          <option value="" selected disabled>Please select</option>
           <option v-for="(item, index) in items" :key="index" :value="item.id">
             {{ item.name }}
           </option>
@@ -25,7 +26,7 @@
     </div>
     <div class="row image-section">
       <div
-        class="col-6 col-sm-4 col-md-3 col-lg-2"
+        class="col-6 col-sm-4 col-md-3 col-lg-2 pb-2"
         v-for="(image, index) in images"
         :key="index"
       >
@@ -77,15 +78,12 @@ export default {
       this.items = await apiService
         .getAllInfo(this.getCategoryUrl)
         .then((response) => {
-          var items = [];
-          response.data.forEach((ele) => {
-            var obj = {
+          return response.data.map((ele) => {
+            return {
               id: ele.id,
               name: ele.name[0].toUpperCase() + ele.name.substring(1),
             };
-            items.push(obj);
           });
-          return items;
         });
     },
     async onChange() {
@@ -103,7 +101,6 @@ export default {
               description: data.breeds.length ? data.breeds[0].description : "",
             };
           });
-          // return images;
         });
     },
     onPageChange(page) {
