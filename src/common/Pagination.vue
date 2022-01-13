@@ -43,15 +43,21 @@ export default {
       default: () => 5,
     },
   },
+  data() {
+    return {
+      start: 0,
+      end: 0,
+    };
+  },
   computed: {
     pages() {
       function range(start, end) {
-        return Array.from(Array(end - start + 1), (_, i) => i + start);
+        return Array.from(Array(end - start + 1), (_, i) => i + start); //cretaes shallo copy of array
       }
 
       const max = this.maxVisible;
-      const middle = Math.floor(this.maxVisible / 2);
-      const pageNum = Math.ceil(this.rowsNumber / this.rowsPerPage);
+      const middle = Math.floor(this.maxVisible / 2); //return largest number
+      const pageNum = Math.ceil(this.rowsNumber / this.rowsPerPage); //return round figure
 
       if (pageNum < max) {
         return range(1, pageNum);
@@ -64,7 +70,6 @@ export default {
         start = pageNum - max + 1;
         end = pageNum;
       }
-
       return range(Math.max(1, start), Math.max(end, max));
     },
   },

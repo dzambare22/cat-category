@@ -1,9 +1,52 @@
 import { mount } from "@vue/test-utils";
 import Pagination from "@/common/Pagination.vue";
+import ApiService from "@/services/fs-services";
+import images from "@/common/images.json";
 
-describe("CommonComponent.vue", () => {
+describe("Pagination.vue", () => {
   let wrapper;
-  wrapper = mount(Pagination);
+  beforeEach(() => {
+    jest.spyOn(ApiService, "getImageOnChange").mockResolvedValue(images);
+    wrapper = mount(Pagination);
+  });
+  afterEach(() => {
+    wrapper.destroy();
+  });
+  it("renders onPageForward", () => {
+    //inputs
+    wrapper.vm.images = [
+      {
+        id: "28j",
+        url: "https://cdn2.thecatapi.com/images/28j.jpg",
+      },
+    ];
+    // wrapper.vm.page = 3;
+    wrapper.vm.value = 3;
+    wrapper.vm.rowsNumber = 50;
+    wrapper.vm.rowsPerPage = 5;
+    wrapper.vm.onPageForward();
+    wrapper.vm.onPageClick(3);
+    expect(wrapper.vm.value).toEqual(3);
+    expect(wrapper.vm.images[0].url).toEqual(
+      "https://cdn2.thecatapi.com/images/28j.jpg"
+    );
+  });
+  it("renders onPageBack", () => {
+    //inputs
+    wrapper.vm.images = [
+      {
+        id: "4bm",
+        url: "https://cdn2.thecatapi.com/images/4bm.gif",
+      },
+    ];
+    wrapper.vm.value = 2;
+    wrapper.vm.onPageBack();
+    wrapper.vm.onPageClick(2);
+    expect(wrapper.vm.value).toEqual(2);
+    expect(wrapper.vm.images[0].url).toEqual(
+      "https://cdn2.thecatapi.com/images/4bm.gif"
+    );
+  });
   it("renders component sucessfully", () => {
     const pagination = wrapper.findComponent(Pagination);
     expect(pagination.exists()).toBe(true);
@@ -24,6 +67,5 @@ describe("CommonComponent.vue", () => {
     jest.spyOn(instance, "onPageClick");
     instance.onPageClick();
     expect(instance.onPageClick).toHaveBeenCalled();
-    // expect(instance.onPageClick).toEqual(3);
   });
 });

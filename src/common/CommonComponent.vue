@@ -78,7 +78,7 @@ export default {
       this.items = await apiService
         .getAllInfo(this.getCategoryUrl)
         .then((response) => {
-          return response.data.map((ele) => {
+          return response.map((ele) => {
             return {
               id: ele.id,
               name: ele.name[0].toUpperCase() + ele.name.substring(1),
@@ -95,7 +95,7 @@ export default {
           this.page
         )
         .then((response) => {
-          return response.data.map((data) => {
+          return response.map((data) => {
             return {
               url: data.url,
               description: data.breeds.length ? data.breeds[0].description : "",
